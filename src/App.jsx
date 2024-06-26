@@ -1,20 +1,24 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import HomeCards from './components/HomeCards';
-import JobListings from './components/JobListings';
-import ViewAllJobs from './components/ViewAllJobs';
+
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import MainLayout from './layouts/MainLayout';
+import JobPage from './pages/JobPage';
+import NotFoundPage from './pages/NotFoundPage';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<MainLayout />}>
+      <Route index element={<HomePage />} />
+      <Route path="/jobs" element={<JobPage />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Route>
+  )
+);
 
 const App = () => {
-  return (
-    <>
-      <Navbar/>
-      <Hero title="Test Title" subTitle="Test Subtitle"/>
-      <HomeCards/>
-      <JobListings/>
-      <ViewAllJobs/>     
-    </>
-  );
+  return <RouterProvider router={router} />
 }
 
 export default App
